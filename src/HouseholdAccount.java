@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HouseholdAccount {
-	private ArrayList<Statement> statementList; //TODO privateにしたいなぁ
+	private ArrayList<Statement> statementList; 
 	private Map<Integer, String> categoryMap;
 	
 	public HouseholdAccount() {
@@ -31,12 +31,5 @@ public class HouseholdAccount {
 
 	public void addStatement(Statement statement) { 
 		statementList.add(statement);
-	}
-	
-	public void showStatement() {
-		for (Statement statement : statementList) {
-			System.out.println(statement.getDate() + " " + statement.getCategory() + " "
-					+ statement.getAmount() + " " + statement.getMemo());
-		}
 	}
 }
