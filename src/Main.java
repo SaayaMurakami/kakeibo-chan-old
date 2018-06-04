@@ -2,23 +2,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
-import java.util.Map.Entry; //TODO 使っていない不要なimport文が残ってしまっているので、Command + Shift + o で、import文を整理しましょう
-import java.util.Set;
 
 public class Main {
 
 	public static void main(String[] args) {
 		HouseholdAccount householdAccount = new HouseholdAccount();
-		String answer = null; //TODO 変数スコープが広いので、最小限のスコープとなるようにしてみてください
-		int year;
-		int month;
-		int date;
-		int catergoryNum;
-		int amount;
-		String memo;
-		int num;
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		try {
+			String answer = null;
 			do {
 				System.out.println("家計簿ちゃん");
 				
@@ -28,37 +19,35 @@ public class Main {
 				builder.append("1.家計簿をつける  2.家計簿を見る");
 				String message = builder.toString();
 				
-				num = inputNumber(message, reader);
+				int num = inputNumber(message, reader);
 				
 				switch (num) {
 				case 1:
 					do {
 						Statement statement = new Statement();
 
-						year = inputNumber("年度を入力してください（ex.1998）", reader);
-						month = inputNumber("月を入力してください（ex.9）", reader);
-						date = inputNumber("日付を入してください（ex.16）", reader);
+						int year = inputNumber("年度を入力してください（ex.1998）", reader);
+						int month = inputNumber("月を入力してください（ex.9）", reader);
+						int date = inputNumber("日付を入してください（ex.16）", reader);
 						LocalDate Date = LocalDate.of(year, month, date);
-						statement.registerdate(Date);	//TODO 入力値のチェック
+						statement.setDate(Date);	//TODO 入力値のチェック
 						
 						System.out.println("カテゴリを選んでください（数字で選択）");
-						for (int key : householdAccount.categoryMap.keySet()) {
-							System.out.print(key + householdAccount.categoryMap.get(key) + " ");
-						}
+						householdAccount.showCategory();
 						System.out.println("");
-						catergoryNum = inputNumber("", reader);
+						int catergoryNum = inputNumber("", reader);
 						while (catergoryNum < 1 || catergoryNum > 8) {
 							System.out.println("1~8の数字で入力してください");
 							catergoryNum = inputNumber("", reader);
 						}
-						statement.registerCategory(householdAccount.categoryMap.get(catergoryNum));
+						statement.setCategory(householdAccount.getCategory(catergoryNum));
 						
-						amount = inputNumber("金額を入力してください（ex.500）", reader);
-						statement.registerAmount(amount);
+						int amount = inputNumber("金額を入力してください（ex.500）", reader);
+						statement.setAmount(amount);
 						
 						System.out.println("メモを入力してください");
-						memo = reader.readLine();
-						statement.registerMemo(memo);
+						String memo = reader.readLine();
+						statement.setMemo(memo);
 						
 						System.out.println("入力内容を確認します");
 						System.out.println(statement.getDate() + " " + statement.getCategory() + " "
@@ -66,7 +55,7 @@ public class Main {
 						System.out.println("登録しますか？（はい/いいえ）");
 						answer = reader.readLine();
 						if (answer.equals("はい")) {
-							householdAccount.registerStatement(statement);
+							householdAccount.addStatement(statement);
 							System.out.println("登録完了");
 							System.out.println("続けて登録しますか？（はい/いいえ）");
 							answer = reader.readLine();

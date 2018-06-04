@@ -3,8 +3,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HouseholdAccount {
-	ArrayList<Statement> statementList; //TODO privateにしたいなぁ
-	Map<Integer, String> categoryMap;
+	private ArrayList<Statement> statementList; //TODO privateにしたいなぁ
+	private Map<Integer, String> categoryMap;
 	
 	public HouseholdAccount() {
 		statementList = new ArrayList<>();
@@ -19,7 +19,17 @@ public class HouseholdAccount {
 		categoryMap.put(8, "その他");
 	}
 	
-	public void registerStatement(Statement statement) { //TODO データを追加する処理なので、registerよりはaddの方が違和感ないかも
+	public void showCategory() {
+		for (int key : categoryMap.keySet()) {
+			System.out.print(key + categoryMap.get(key) + " ");
+		}	
+	}
+	
+	public String getCategory(int categoryNum) {
+		return categoryMap.get(categoryNum);
+	}
+
+	public void addStatement(Statement statement) { 
 		statementList.add(statement);
 	}
 	
