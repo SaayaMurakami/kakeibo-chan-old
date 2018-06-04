@@ -1,12 +1,12 @@
 import java.time.LocalDate;
 
 public class Statement {
-	LocalDate date;
+	LocalDate date; //TODO Privateにしたいなぁ。
 	String category;
 	int amount;
 	String memo;
 	
-	public void registerdate(LocalDate date) {
+	public void registerdate(LocalDate date) { //TODO 単純に値を設定する処理を行う場合、プログラミングだとsetXXXというメソッドを使うのが良いです。registerでも間違いじゃないのですが、もっと色々処理して登録するようなイメージを抱きます
 		this.date = date;
 	}
 	
@@ -38,7 +38,7 @@ public class Statement {
 		return memo;
 	}
 	
-	public void removeStatement() {
+	public void removeStatement() { //TODO これは使ってないから、削除しちゃった方が良いですね
 		date = null;
 		category = null;
 		amount = 0;

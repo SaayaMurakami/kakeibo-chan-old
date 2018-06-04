@@ -2,14 +2,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
-import java.util.Map.Entry;
+import java.util.Map.Entry; //TODO 使っていない不要なimport文が残ってしまっているので、Command + Shift + o で、import文を整理しましょう
 import java.util.Set;
 
 public class Main {
 
 	public static void main(String[] args) {
 		HouseholdAccount householdAccount = new HouseholdAccount();
-		String answer = null;
+		String answer = null; //TODO 変数スコープが広いので、最小限のスコープとなるようにしてみてください
 		int year;
 		int month;
 		int date;
