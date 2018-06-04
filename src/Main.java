@@ -7,6 +7,10 @@ public class Main {
 
 	public static void main(String[] args) {
 		HouseholdAccount householdAccount = new HouseholdAccount();
+		
+		// Hello!
+		
+		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		try {
 			String answer = null;
