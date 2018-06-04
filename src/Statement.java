@@ -37,4 +37,8 @@ public class Statement {
 	public String getMemo() {
 		return memo;
 	}
+	
+	public String showStatement() {
+		return getDate() + " " + getCategory() + " " + getAmount() + " " + getMemo();
+	}
 }

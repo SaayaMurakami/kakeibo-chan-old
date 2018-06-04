@@ -1,6 +1,12 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 
 public class Main {
@@ -20,6 +26,7 @@ public class Main {
 				String message = builder.toString();
 				
 				int num = inputNumber(message, reader);
+				Path path = Paths.get("/Users/s-murakami/Kakeibo-chan.csv");
 				
 				switch (num) {
 				case 1:
@@ -55,7 +62,13 @@ public class Main {
 						System.out.println("登録しますか？（はい/いいえ）");
 						answer = reader.readLine();
 						if (answer.equals("はい")) {
-							householdAccount.addStatement(statement);
+							try (BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8, StandardOpenOption.APPEND)){
+								writer.append(statement.showStatement());
+								writer.newLine();
+							} catch (IOException e) {
+								System.out.println("正しく書き込みできませんでした。");
+								System.err.println(e);
+							}
 							System.out.println("登録完了");
 							System.out.println("続けて登録しますか？（はい/いいえ）");
 							answer = reader.readLine();
@@ -71,7 +84,13 @@ public class Main {
 					} while (answer.equals("はい"));
 					break;
 				case 2:
-					householdAccount.showStatement();
+					try(BufferedReader reader2 = Files.newBufferedReader(path, StandardCharsets.UTF_8)){
+						for (String line; (line = reader2.readLine()) != null;) {
+							System.out.println(line);
+						}
+					} catch (IOException e) {
+							System.out.println("正しく読み込みされませんでした");
+					}
 					do {
 						System.out.println("参照をやめる場合は「終了」と入力");
 						answer = reader.readLine();
